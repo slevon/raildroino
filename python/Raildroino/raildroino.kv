@@ -1,0 +1,60 @@
+#:kivy 1.8.0
+
+<Raildroino>:
+        canvas.before:
+                Color:
+                        rgba: 1, 1, 1, 1
+                Rectangle:
+                        # this implicitly binds the size of the
+                        # rect to the size of the widget
+                        size: self.size
+                        # self here still refers to the widget as Rectangle is only a
+                        # graphics instruction and not a widget
+                        pos: self.pos
+        id:"main"
+        BoxLayout:
+                #bind the size to widgets size
+                size: root.size
+                orientation: "horizontal"
+                BoxLayout:
+                        #bind the size to widgets size
+                        orientation: "vertical"
+                        id:"train_1"
+                        Image:
+                                size_hint_x:None
+                                width:500
+                        BoxLayout:
+                                id:"train_2"
+                                Button:
+                                        font_size: 70
+                                        text: "+"
+                                        background_color:[1,0.5,0.5,1]
+                                Slider:
+                                        size_hint_x:None
+                                        width: 300
+                                        value: 30
+                                Button:
+                                        font_size: 70
+                                        text: "-"
+                TabbedPanel:
+                        do_default_tab: False
+                        tab_pos: 'top_mid'
+                        TabbedPanelItem:
+                                background_color:[1,0.5,0.5,1]
+                                text:"Weichen"
+                                BoxLayout:
+                                        background_color:[1,0.5,0.5,1]
+                                        Label:
+                                                text: 'Second tab content area'
+                                        Button:
+                                                text: 'Button that does nothing'
+                        TabbedPanelItem:
+                                background_color:[0.5,1,0.5,1]
+                                background_down:[0.5,1,1,1]
+                                text:"Signale"
+                                BoxLayout:
+                                        background_color:[0.5,1,0.5,1]
+                                        Label:
+                                                text: 'First tab content area'
+                                        Button:
+                                                text: 'Butt that does nothing'
