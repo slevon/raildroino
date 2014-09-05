@@ -1,9 +1,75 @@
 #:kivy 1.8.0
+<CntrlLoco>:
+        #bind the size to widgets size
 
+        canvas.before:
+                Color:
+                        rgba: 0.4, 0.4, 0.4, 1
+                Rectangle:
+                        size: self.size
+
+                        pos: self.pos
+
+        BoxLayout:
+                id:"train_2"
+                orientation: "horizontal"
+                padding: 10
+                Label:
+                        size_hint_x: 0.3
+                        id: label
+                        color: [0.7,0.7,0.7,1]
+                        font_size: 70
+                        text: root.adress
+                        #value: 30
+                        #canvas.before:
+                        #        Color:
+                        #                rgba: 0, 1, 0, 1
+                        #        Rectangle:
+                        #                size: self.width, self.height * ( self.value / 100)
+                        #                pos: self.pos
+                BoxLayout:
+                        orientation: "vertical"
+                        BoxLayout:
+                                orientation:"horizontal"
+                                size_hint_y: 0.3
+                                ToggleButton:
+                                        text:"Vorwärts"
+                                        on_state:
+                                                if self.state == 'down': self.text='Rückwärts'
+                                                if self.state == 'normal': self.text='Vorwärts'
+                                ToggleButton:
+                                        text:"Funktion"
+                        BoxLayout:
+                                orientation:"horizontal"
+                                Button:
+                                        font_size: 70
+                                        text: "-"
+                                        background_color: [1,0.5,0.5,1]
+                                        on_press: slider.value =slider.value - 5
+                                Slider:
+                                        size_hint_x: None
+                                        width: 300
+                                        value: 30
+                                        id: slider
+                                        on_value:
+                                                if self.value>self.max: self.value=self.max
+                                                if self.value<self.min: self.value=self.min
+                                                #label.value = self.value
+                                        canvas.before:
+                                                Color:
+                                                        rgba: 0, 1, 0, 1
+                                                Rectangle:
+                                                        size: self.width * ( self.value / 100) , self.height
+                                                        pos: self.pos
+                                Button:
+                                        font_size: 70
+                                        text: "+"
+                                        background_color:[0.5,1,0.5,1]
+                                        on_press: slider.value = slider.value + 5
 <Raildroino>:
         canvas.before:
                 Color:
-                        rgba: 1, 1, 1, 1
+                        rgba: 0.3, 0.3, 0.3, 1
                 Rectangle:
                         # this implicitly binds the size of the
                         # rect to the size of the widget
@@ -11,50 +77,33 @@
                         # self here still refers to the widget as Rectangle is only a
                         # graphics instruction and not a widget
                         pos: self.pos
-        id:"main"
+        id:main
         BoxLayout:
-                #bind the size to widgets size
                 size: root.size
-                orientation: "horizontal"
-                BoxLayout:
-                        #bind the size to widgets size
-                        orientation: "vertical"
-                        id:"train_1"
-                        Image:
-                                size_hint_x:None
-                                width:500
+                pos: root.pos
+                orientation:"vertical"
+                id: main_layout
+
+<TabPanel>:
+        TabbedPanel:
+                do_default_tab: False
+                tab_pos: 'top_mid'
+                TabbedPanelItem:
+                        background_color:[1,0.5,0.5,1]
+                        text:"Weichen"
                         BoxLayout:
-                                id:"train_2"
-                                Button:
-                                        font_size: 70
-                                        text: "+"
-                                        background_color:[1,0.5,0.5,1]
-                                Slider:
-                                        size_hint_x:None
-                                        width: 300
-                                        value: 30
-                                Button:
-                                        font_size: 70
-                                        text: "-"
-                TabbedPanel:
-                        do_default_tab: False
-                        tab_pos: 'top_mid'
-                        TabbedPanelItem:
                                 background_color:[1,0.5,0.5,1]
-                                text:"Weichen"
-                                BoxLayout:
-                                        background_color:[1,0.5,0.5,1]
-                                        Label:
-                                                text: 'Second tab content area'
-                                        Button:
-                                                text: 'Button that does nothing'
-                        TabbedPanelItem:
+                                Label:
+                                        text: 'Second tab content area'
+                                Button:
+                                        text: 'Button that does nothing'
+                TabbedPanelItem:
+                        background_color:[0.5,1,0.5,1]
+
+                        text:"Signale"
+                        BoxLayout:
                                 background_color:[0.5,1,0.5,1]
-                                background_down:[0.5,1,1,1]
-                                text:"Signale"
-                                BoxLayout:
-                                        background_color:[0.5,1,0.5,1]
-                                        Label:
-                                                text: 'First tab content area'
-                                        Button:
-                                                text: 'Butt that does nothing'
+                                Label:
+                                        text: 'First tab content area'
+                                Button:
+                                        text: 'Butt that does nothing'

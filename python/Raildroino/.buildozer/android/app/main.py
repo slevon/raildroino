@@ -17,34 +17,20 @@ and signals directly from the UI
 
 from kivy.app import App
 from kivy.uix.widget import Widget
-from kivy.uix.slider import Slider
-from kivy.uix.button import Button
 from kivy.uix.boxlayout import BoxLayout
-from kivy.properties import StringProperty
-
 
 
 class Raildroino(Widget):
-
-
-    def add(self):
-        for i in range(5):
-            print(i)
-            self.ids.main_layout.add_widget(CntrlLoco(adress=str(i)))
-
+    pass
 
 class CntrlLoco(BoxLayout):
-    adress = StringProperty('??')
-
+    pass
 
 
 class RaildroinoApp(App):
     def build(self):
-        rd =  Raildroino()
-        rd.add()
-        return rd
+        return Raildroino()
 
 
 if __name__ == '__main__':
-    print("check")
     RaildroinoApp().run()
